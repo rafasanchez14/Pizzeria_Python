@@ -1,6 +1,7 @@
 import Calculate.Calculate as calc
 import Util.Util as ut
 import Data.Data as dat
+import Factura.GenFactura as fact
 import os 
 
 #Funcion que permite seleccionar el tamaño de la pizza
@@ -48,7 +49,14 @@ ____________________________ '''
         objadd.clear()
         SeleccionarTamaño()
     else:
-       calc.CalcularTotal(orderListAdd_Total)
+        tasa = input('inserte tasa mayor a 1 para ver  en divisas=> ')
+        if (tasa.isdigit()):
+            if (int(tasa)>1):
+                calc.CalcularTotal(orderListAdd_Total,tasa)
+            else:
+                calc.CalcularTotal(orderListAdd_Total)
+        else:
+            calc.CalcularTotal(orderListAdd_Total)
        #print(orderListAdd_Total)
 
 
@@ -103,7 +111,8 @@ Titulo()
 orderListAdd = []
 orderListAdd_Total = []
 SeleccionarTamaño()
-
+fact.Generate_Comprobante(orderListAdd_Total)
+print('Gracias por su compra')
 
 #documentar 
 #trabajo
